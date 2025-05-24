@@ -2,14 +2,14 @@ const express = require('express');
 const cors = require('cors')
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
-const { ModelConfig } = require('./config/model.config');
-const courseRouter = require('./router/course.routes');
-const userRouter = require('./router/user.routes');
-const lessonRouter = require('./router/lesson.routes');
-const chapterRouter = require('./router/chapter.routes');
-const registerRouter = require('./router/register.routes');
-const loginRouter = require('./router/login.routes')
-const verifyAuthRouter = require('./router/verifyauth.routes')
+const { ModelConfig } = require('../config/model.config');
+const courseRouter = require('../router/course.routes');
+const userRouter = require('../router/user.routes');
+const lessonRouter = require('../router/lesson.routes');
+const chapterRouter = require('../router/chapter.routes');
+const registerRouter = require('../router/register.routes');
+const loginRouter = require('../router/login.routes')
+const verifyAuthRouter = require('../router/verifyauth.routes')
 const serverless = require('serverless-http');
 
 
