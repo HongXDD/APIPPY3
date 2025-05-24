@@ -10,6 +10,7 @@ const chapterRouter = require('./router/chapter.routes');
 const registerRouter = require('./router/register.routes');
 const loginRouter = require('./router/login.routes')
 const verifyAuthRouter = require('./router/verifyauth.routes')
+const serverless = require('serverless-http');
 
 
 
@@ -44,10 +45,5 @@ app.use('/zcode',loginRouter);
 app.use('/zcode',verifyAuthRouter);
 
 
-
-
-
-
-app.listen(port, () => {
-    console.log(`Server is running at http://localhost:${port}`);
-});
+module.exports = app;
+module.exports.handler = serverless(app);
