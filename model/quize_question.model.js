@@ -21,21 +21,6 @@ const Quiz_Question = sequelize.define('QuizQuestion', {
         allowNull: false,
         charset: 'utf8mb4'
     },
-    option_a:{
-        type: DataTypes.STRING,
-        allowNull: false,
-        charset: 'utf8mb4'
-    },
-    option_b:{
-        type: DataTypes.STRING,
-        allowNull: false,
-        charset: 'utf8mb4'
-    },
-    option_c:{
-        type: DataTypes.STRING,
-        allowNull: false,
-        charset: 'utf8mb4'
-    },
     answer:{
         type: DataTypes.STRING,
         allowNull: false

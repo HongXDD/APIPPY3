@@ -25,7 +25,6 @@ exports.login = async (req, res) => {
             'jwt-secret-key',
             {expiresIn: '1h'}
         );
-
         // 4. Set cookie securely
         res.cookie('token', token, {
             httpOnly: true,
@@ -37,6 +36,7 @@ exports.login = async (req, res) => {
         // 5. Send success response (without token, since it's in the cookie)
         res.json({
             message: 'Login successful',
+            token: token, // Optional: if you want to return the token in the response
             user: {
                 id: user.id,
                 email: user.email,

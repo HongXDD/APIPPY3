@@ -24,11 +24,15 @@ exports.getById = async (req, res) => {
     }
 };
 exports.create = async (req, res) => {
-    const { user_id, lesson_id } = req.body;
+    const { user_id, lesson_id ,score,quiz_id,is_completed } = req.body;
     try {
         const newStudentLesson = await student_lesson.create({
-            user_id,
-            lesson_id
+           student_id:user_id,
+           lesson_id:lesson_id,
+           quiz_id:quiz_id,
+           score:score,
+           is_completed:is_completed
+
         });
         res.status(201).json(newStudentLesson);
     } catch (error) {
@@ -38,14 +42,15 @@ exports.create = async (req, res) => {
 };
 exports.update = async (req, res) => {
     const student_lessonId = req.params.id;
-    const { user_id, lesson_id } = req.body;
+    
+    const { score } = req.body;
     try {
-        const student_lessonToUpdate = await student_lesson.findByPk(student_lessonId);
+        const student_lessonToUpdate = await student_lesson.findOne({student_lessonId});
+
         if (!student_lessonToUpdate) {
             return res.status(404).json({ error: 'student_lesson not found' });
         }
-        student_lessonToUpdate.user_id = user_id;
-        student_lessonToUpdate.lesson_id = lesson_id;
+        student_lessonToUpdate.score = score;
         await student_lessonToUpdate.save();
         res.json(student_lessonToUpdate);
     } catch (error) {

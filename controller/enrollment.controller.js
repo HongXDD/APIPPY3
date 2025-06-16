@@ -27,14 +27,36 @@ exports.getById = async (req, res) => {
 
 exports.create = async (req, res) => {
     const { user_id, course_id } = req.body;
+
     try {
+        // // 1. Check if an enrolment with these user_id and course_id already exists
+        // const existingEnrolment = await Enrolment.findOne({
+        //     user_id, course_id 
+        // });
+
+        // // 2. If an existing enrolment is found, send a 409 Conflict response
+        // if (existingEnrolment) {
+        //     return res.status(409).json({
+        //         error: 'Enrolment already exists.',
+        //         enrolment: existingEnrolment // Optionally return the existing enrolment details
+        //     });
+        // }
+
+        // 3. If no existing enrolment is found, proceed to create a new one
         const newEnrolment = await Enrolment.create({
-            user_id,
-            course_id
+            User_id:user_id,
+            course_id:course_id
         });
+
+        // 4. Send a 201 Created response with the new enrolment
         res.status(201).json(newEnrolment);
+
     } catch (error) {
         console.error('Error creating enrolment:', error);
+        // Handle validation errors or other specific errors if needed
+        if (error.name === 'ValidationError') { // Example for Mongoose validation errors
+             return res.status(400).json({ error: error.message });
+        }
         res.status(500).json({ error: 'Internal server error' });
     }
 };

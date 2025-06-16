@@ -9,5 +9,6 @@ router.get('/lessons/:id',lessonController.getByid);
 router.post('/lessons',lessonController.post);
 router.put('/lessons/:id',lessonController.update);
 router.delete('/lessons/:id',lessonController.delete);
+router.get('/course/chapter/lession/:id',lessonController.getByChapter);
 module.exports = router;
 

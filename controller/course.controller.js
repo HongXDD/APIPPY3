@@ -42,5 +42,20 @@ exports.create = async (req, res) => {
         res.status(500).json({ error: 'Internal server error' });
     }
 };
+exports.getByTitle = async (req, res) => {
+    const categoryId = req.params.id;
+    try {
+        const courses = await Course.findAll({
+            where: { title: categoryId }
+        });
+        if (courses.length === 0) {
+            return res.status(404).json({ error: 'No courses found for this category' });
+        }
+        res.json(courses);
+    } catch (error) {
+        console.error('Error fetching courses by category:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+}
 
 

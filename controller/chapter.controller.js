@@ -1,3 +1,4 @@
+const { AssociationError } = require('sequelize');
 const { Chapter } = require('../model/chapter.model');
 
 exports.get = async (req, res) => {
@@ -69,6 +70,23 @@ exports.delete =  async (req, res) => {
         res.status(204).send();
     } catch (error) {
         console.error('Error deleting chapter:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+}
+
+exports.getByCourse_id  = async (req ,res )=>{
+    const course_id = req.params.id;
+    try {
+        const chapter = await Chapter.findAll({
+            where:{ course_id : course_id },
+        });
+        if (chapter.length === 0) {
+            return res.status(404).json({ error: 'No courses found for this category' });
+        }
+        res.json(chapter)
+
+    }catch(error){
+         console.error('Error deleting chapter:', error);
         res.status(500).json({ error: 'Internal server error' });
     }
 }

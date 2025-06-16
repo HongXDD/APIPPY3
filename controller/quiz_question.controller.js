@@ -1,7 +1,12 @@
 const { Quiz_Question } = require('../model/quize_question.model');
+const {Option} = require('../model/opption.model')
 exports.get = async (req, res) => {
     try {
-        const quiz_questions = await Quiz_Question.findAll();
+        const quiz_questions = await Quiz_Question.findAll({
+            include:{
+                model:Option
+            }
+        });
         res.json(quiz_questions);
     } catch (error) {
         console.error('Error fetching quiz questions:', error);
@@ -76,3 +81,20 @@ exports.delete = async (req, res) => {
         res.status(500).json({ error: 'Internal server error' });
     }
 };
+exports.getByqueizId = async (req,res) =>{
+    const quizId = req.params.id;
+    try{
+            const queizquestion = await Quiz_Question.findAll({
+        where:{quiz_id :quizId },
+        include:[
+            {
+                model:Option
+            }
+        ]
+    });
+    res.json(queizquestion)
+
+    }catch(err){
+        console.log(err);
+    }
+}

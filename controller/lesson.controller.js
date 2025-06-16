@@ -64,3 +64,17 @@ exports.delete = async (req, res) => {
         res.status(500).json({ error: 'Internal server error' });
     }
 };
+
+exports.getByChapter = async (req,res) =>{
+    const chapterId = req.params.id;
+    try {
+        const lesson = await Lesson.findAll({
+            where : {chapter_id : chapterId }
+        });
+        res.json(lesson)
+    }catch(err){
+        console.error('Error deleting lesson:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+
+}

@@ -1,8 +1,17 @@
 const { Quiz } = require('../model/quiz.model'); // Assuming you have a Quiz model defined in models/index.js
+const { Quiz_Question } = require('../model/quize_question.model');
+const { Option } = require('../model/opption.model')
 
 exports.get = async (req, res) => {
     try {
-        const quizzes = await Quiz.findAll();
+        const quizzes = await Quiz.findAll({
+           include:[{
+            model:Quiz_Question,
+                include:[{
+                    model:Option
+                }]
+           }]
+        });
         res.json(quizzes);
     } catch (error) {
         console.error('Error fetching quizzes:', error);
@@ -68,3 +77,17 @@ exports.delete = async (req, res) => {
         res.status(500).json({ error: 'Internal server error' });
     }
 };
+
+exports.getBylession = async (req,res) =>{
+    const lessionId = req.params.id;
+    try{
+    const queiz = await Quiz.findAll({
+        where:{lesson_id : lessionId},
+    });
+    res.json(queiz)
+    }catch(err){
+        console.log(err)
+
+    }
+
+} 
