@@ -2,21 +2,21 @@ const express = require('express');
 const cors = require('cors')
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
-const { ModelConfig } = require('../config/model.config');
-const courseRouter = require('../router/course.routes');
-const userRouter = require('../router/user.routes');
-const lessonRouter = require('../router/lesson.routes');
-const chapterRouter = require('../router/chapter.routes');
-const cartegoryRouter = require('../router/category.routes')
-const registerRouter = require('../router/register.routes');
-const loginRouter = require('../router/login.routes')
-const verifyAuthRouter = require('../router/verifyauth.routes')
-const logoutRouter = require('../router/logout.routes');
-const quizRouter = require('../router/quiz.routes');
-const questqueizRouter = require('../router/quiz_question.routes');
-const detailcourseRouter = require('../router/detailcourse.routes');
-const studentLessonRouter = require('../router/student_lesson.routes');
-const EnrolmentRouter = require('../router/enrolment.routes');
+const { ModelConfig } = require('./config/model.config');
+const courseRouter = require('./router/course.routes');
+const userRouter = require('./router/user.routes');
+const lessonRouter = require('./router/lesson.routes');
+const chapterRouter = require('./router/chapter.routes');
+const cartegoryRouter = require('./router/category.routes')
+const registerRouter = require('./router/register.routes');
+const loginRouter = require('./router/login.routes')
+const verifyAuthRouter = require('./router/verifyauth.routes')
+const logoutRouter = require('./router/logout.routes');
+const quizRouter = require('./router/quiz.routes');
+const questqueizRouter = require('./router/quiz_question.routes');
+const detailcourseRouter = require('./router/detailcourse.routes');
+const studentLessonRouter = require('./router/student_lesson.routes');
+const EnrolmentRouter = require('./router/enrolment.routes');
 
 
 require('dotenv').config();
