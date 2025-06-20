@@ -1,9 +1,18 @@
 const { Course } = require('../model/course.model');
-
+const { Chapter} = require('../model/chapter.model');
+const { Lesson} = require('../model/lesson.model');
 
 exports.get = async (req, res) => {
     try {
-        const courses = await Course.findAll();
+        const courses = await Course.findAll({
+            model:Course,
+            include:[{
+                model:Chapter,
+                include:[{
+                    model:Lesson
+                }]
+            }]
+        });
         res.json(courses);
     } catch (error) {
         console.error('Error fetching courses:', error);

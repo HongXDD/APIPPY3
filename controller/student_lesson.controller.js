@@ -1,7 +1,7 @@
 const { student_lesson } = require('../model/student_lesson.model');
 
 
-exports.get = async (req, res) => {
+    exports.get = async (req, res) => {
     try {
         const student_lessons = await student_lesson.findAll();
         res.json(student_lessons);
@@ -10,7 +10,7 @@ exports.get = async (req, res) => {
         res.status(500).json({ error: 'Internal server error' });
     }
 };
-exports.getById = async (req, res) => {
+    exports.getById = async (req, res) => {
     const student_lessonId = req.params.id;
     try {
         const student_lesson = await student_lesson.findByPk(student_lessonId);
@@ -23,7 +23,7 @@ exports.getById = async (req, res) => {
         res.status(500).json({ error: 'Internal server error' });
     }
 };
-exports.create = async (req, res) => {
+    exports.create = async (req, res) => {
     const { user_id, lesson_id ,score,quiz_id,is_completed } = req.body;
     try {
         const newStudentLesson = await student_lesson.create({
@@ -40,16 +40,22 @@ exports.create = async (req, res) => {
         res.status(500).json({ error: 'Internal server error' });
     }
 };
-exports.update = async (req, res) => {
+    exports.update = async (req, res) => {
     const student_lessonId = req.params.id;
     
-    const { score } = req.body;
+    const { score ,student_id } = req.body;
     try {
-        const student_lessonToUpdate = await student_lesson.findOne({student_lessonId});
+        const student_lessonToUpdate = await student_lesson.findOne({
+           where: {
+                student_id: student_id,
+                lesson_id: student_lessonId
+            }
+        });
 
         if (!student_lessonToUpdate) {
             return res.status(404).json({ error: 'student_lesson not found' });
         }
+
         student_lessonToUpdate.score = score;
         await student_lessonToUpdate.save();
         res.json(student_lessonToUpdate);
@@ -58,7 +64,7 @@ exports.update = async (req, res) => {
         res.status(500).json({ error: 'Internal server error' });
     }
 };
-exports.delete = async (req, res) => {
+    exports.delete = async (req, res) => {
     const student_lessonId = req.params.id;
     try {
         const student_lessonToDelete = await student_lesson.findByPk(student_lessonId);

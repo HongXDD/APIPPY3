@@ -5,6 +5,7 @@ const { Option } = require('../model/opption.model')
 exports.get = async (req, res) => {
     try {
         const quizzes = await Quiz.findAll({
+            model:Quiz,
            include:[{
             model:Quiz_Question,
                 include:[{
@@ -87,7 +88,6 @@ exports.getBylession = async (req,res) =>{
     res.json(queiz)
     }catch(err){
         console.log(err)
-
     }
 
 } 
